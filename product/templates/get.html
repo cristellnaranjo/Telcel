@@ -1,0 +1,66 @@
+{% include "layout/header.html" %}
+<section style=" background: url('https://images.pexels.com/photos/1309644/pexels-photo-1309644.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940') top center; background-size: cover;">
+  
+  </section>
+  <main id="main">
+    <!-- ======= Faq Section ======= -->
+    <section id="faq" class="faq">
+        <div class="container-fluid">
+  
+          <div class="row">
+  
+            <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
+  
+              <div class="content">
+                <h3>Viaja con nosotros a <strong>{{data.name}}</strong></h3>
+                <p>
+                  Disfruta de unas brillantes vacaciones en {{data.name}} saliendo desde {{data.name}}, disfrutaras del viaje de tus sueños con nustros vuelos economicos y de gran calidad.
+                </p>
+              </div>
+  
+              <div class="accordion-list">
+                <ul>
+                  <li>
+                    <a data-toggle="collapse" class="collapse" href="#accordion-list-1">¿De donde sale? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                    <div id="accordion-list-1" class="collapse show" data-parent=".accordion-list">
+                      <p>
+                        Del Aeropuerto Internacional de {{data.name}}
+                      </p>
+                    </div>
+                  </li>
+  
+                  <li>
+                    <a data-toggle="collapse" href="#accordion-list-2" class="collapsed">¿Cuánto debo pagar? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                    <div id="accordion-list-2" class="collapse" data-parent=".accordion-list">
+                      <p>
+                        El vuelo tiene un valor de ${{data.name}} MXN por persona. Incluye impuestos, tasas y cargos.
+                      </p>
+                    </div>
+                  </li>
+  
+                  <li>
+                    <a data-toggle="collapse" href="#accordion-list-3" class="collapsed">¿Cuándo sale? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                    <div id="accordion-list-3" class="collapse" data-parent=".accordion-list">
+                      <p>
+                        La fecha es el {{data.name}} a las {{data.name}} hrs
+                      </p>
+                    </div>
+                  </li>
+  
+                </ul>
+                <div style="display:flex; justify-content: space-around">
+                    <a href="/update/{{data.id}}"><button style=" width: 350px; border: 2px solid #009961; padding: 10px 30px; background: white; color: #009961; font-size: 14px; font-weight: 400; font-family: 'Raleway', sans-serif;font-weight: 600;transition: 0.4s;border-radius: 50px">Editar</button></a>
+                    <a href="/delete/{{data.id}}"><button style=" width:350px; border: 2px solid #009961; padding: 10px 30px; background: white; color: #009961; font-size: 14px; font-weight: 400; font-family: 'Raleway', sans-serif;font-weight: 600;transition: 0.4s;border-radius: 50px">Eliminar</button></a>
+              </div>
+              </div>
+              
+              
+            </div>
+  
+            <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img" style='background-image: url("https://images.pexels.com/photos/1309644/pexels-photo-1309644.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");'>&nbsp;</div>
+          </div>
+  
+        </div>
+      </section><!-- End Faq Section -->
+      {% include "layout/footer.html" %}
+

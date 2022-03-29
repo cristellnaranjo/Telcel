@@ -1,0 +1,59 @@
+{% include "layout/header.html" %}
+<!-- ======= Header ======= -->
+
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex flex-column justify-content-center" style=" background: url('https://images.pexels.com/photos/3473411/pexels-photo-3473411.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940') top center; background-size: cover">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-xl-8">
+        <h1>Cámbiate a Telcel y obtén grandes beneficios</h1>
+        <h2>Renueva tu y elige el smartphone que más te guste</h2>
+        <a href="https://www.youtube.com/watch?v=kLAs-VLKfDY" class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a>
+      </div>
+    </div>
+  </div>
+  </section>
+  <main id="main">
+
+    
+    <!-- ======= Pricing Section ======= -->
+    <section id="pricing" class="pricing">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Celulares</h2>
+          <p>Checa todos nuestros celulares y sus precios</p>
+        </div>
+
+        <div class="row">
+          {% for obj in products %}
+          <div class="col-lg-4 col-md-6 mt-4 mt-lg-0" style="margin-bottom: 30px">
+            {% if obj.list_price < 10000 %}
+              <div class="box recommended">
+                <span class="recommended-badge">Recomendado</span>
+              {% else %}
+              <div class="box">
+              {% endif %}
+              <h3>{{ obj.name}}</h3>
+              <h4><sup>$</sup>{{ obj.list_price }}<span> MXN</span></h4>
+              <ul>
+                <li>{{ obj.description }}</li>
+              </ul>
+              
+              <div class="btn-wrap">
+                <a href="/get/{{obj.id}}" class="btn-buy">Más información</a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+      </div>
+    </section><!-- End Pricing Section -->
+
+    
+  </main><!-- End #main -->
+
+
+{% include "layout/footer.html" %}

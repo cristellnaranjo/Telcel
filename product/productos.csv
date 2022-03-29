@@ -1,26 +1,26 @@
-name ,default_code,list_price,copany_id
-Galaxy s22 Ultra,8.57427E+12,30999,4
-Galaxy s22 Plus,2.90207E+12,25999,4
-Galaxy s22,2.49007E+12,21999,4
-Galaxy s21 FE,2.08001E+12,19999,4
-Galaxy s21 Ultra,1.71241E+12,26999,4
-Galaxy s20 FE,1.32909E+12,12999,4
-iPhone 13 mini,5.66814E+12,17999,4
-iPhone 13,9.03142E+12,20999,4
-iPhone 13 Pro,7.49075E+12,25999,4
-iPhone 13 Pro Max,1.21144E+12,28999,4
-iPhone 12 mini,4.275E+12,14999,4
-iPhone 12,2.16839E+12,17999,4
-iPhone 12 Pro,2.7089E+12,22999,4
-iPhone 12 Pro Max,7.1686E+12,25999,4
-Xiaomi Mi 11,5.28727E+12,21999,4
-Xiaomi Mi 11 Lite 5G,2.94612E+12,10299,4
-Xiaomi 11T Pro,9.11023E+12,17999,4
-Xiaomi Mi 11 Lite 4G,5.04561E+12,9499,4
-Poco F3 5G,1.7497E+12,8699,4
-Oppo A53,6.72417E+12,5999,4
-Oppo A93,7.46E+12,9489,4
-Oppo Reno 6 Lite,1.14375E+12,8799,4
-Oppo Reno 6,5.316E+12,15999,4
-Oppo Reno 5 Z,3.52415E+12,11999,4
-Oppo Reno 5 Lite,2.36046E+12,8499,4
+name ,description,description_purchase,description_sale,type,barcode,default_code,categ_id,list_price,volume,weight,company_id,sale_ok,purchase_ok,active,imagen
+Galaxy s22 Ultra,,,,product,8.57427E+12,Samsung-8574270000000,1,30999,10,150,4,true,true,true,https://t-mobile.scene7.com/is/image/Tmusprod/Samsung-Galaxy-S22-Ultra-Burgund-frontimage
+Galaxy s22 Plus,,,,product,2.90207E+12,Samsung-2902070000000,1,25999,10,150,4,true,true,true,https://f.fenicio.app/imgs/25a5c7/stienda.uy/sam/5ecc/original/catalogo/GS22P88060940235722/800_800/samsung-galaxy-s22-plus-256-gb-green-galaxy-buds-2.jpg
+Galaxy s22,,,,product,2.49007E+12,Samsung-2490070000000,1,21999,10,150,4,true,true,true,https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/samsung/Samsung-Galaxy-S22/Green/Samsung-Galaxy-S22-Green-frontimage.png
+Galaxy s21 FE,,,,product,2.08001E+12,Samsung-2080010000000,1,19999,10,150,4,true,true,true,https://doto.vtexassets.com/arquivos/ids/184200/samsung-galaxy-s21-fe-128gb-verde-dotomexico-ambas-vistas.jpg?v=637757151765670000
+Galaxy s21 Ultra,,,,product,1.71241E+12,Samsung-1712410000000,1,26999,10,150,4,true,true,true,https://samsungmx.vtexassets.com/arquivos/ids/180352-800-auto?width=800&height=auto&aspect=true
+Galaxy s20 FE,,,,product,1.32909E+12,Samsung-1329090000000,1,12999,10,150,4,true,true,true,https://samsungmx.vtexassets.com/arquivos/ids/180446-800-auto?width=800&height=auto&aspect=true
+iPhone 13 mini,,,,product,5.66814E+12,Apple-5668140000000,1,17999,10,150,4,true,true,true,https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-13-mini-blue-select-2021?wid=470&hei=556&fmt=jpeg&qlt=95&.v=1645572315986
+iPhone 13,,,,product,9.03142E+12,Apple-9031420000000,1,20999,10,150,4,true,true,true,https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-13-pink-select-2021?wid=470&hei=556&fmt=jpeg&qlt=95&.v=1645572315935
+iPhone 13 Pro,,,,product,7.49075E+12,Apple-7490750000000,1,25999,10,150,4,true,true,true,https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-13-pro-silver-select?wid=940&hei=1112&fmt=png-alpha&.v=1645552345849
+iPhone 13 Pro Max,,,,product,1.21144E+12,Apple-1211440000000,1,28999,10,150,4,true,true,true,https://ishopmx.vtexassets.com/arquivos/ids/173403-800-auto?v=637794982323470000&width=800&height=auto&aspect=true
+iPhone 12 mini,,,,product,4.275E+12,Apple-4275000000000,1,14999,10,150,4,true,true,true,https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-12-mini-red-select-2020?wid=470&hei=556&fmt=jpeg&qlt=95&.v=1604343707000
+iPhone 12,,,,product,2.16839E+12,Apple-2168390000000,1,17999,10,150,4,true,true,true,https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-12-purple-select-2021?wid=470&hei=556&fmt=jpeg&qlt=95&.v=1617130317000
+iPhone 12 Pro,,,,product,2.7089E+12,Apple-2708900000000,1,22999,10,150,4,true,true,true,https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MHLD3?wid=1144&hei=1144&fmt=jpeg&qlt=80&.v=1601149541000
+iPhone 12 Pro Max,,,,product,7.1686E+12,Apple-7168600000000,1,25999,10,150,4,true,true,true,https://www.techinn.com/f/13782/137821847/apple-iphone-12-pro-max-6gb-128gb-6.7.jpg
+Xiaomi Mi 11,,,,product,5.28727E+12,Xiaomi-5287270000000,1,21999,10,150,4,true,true,true,https://www.sanborns.com.mx/imagenes-sanborns-ii/1200/2005698250551.jpg
+Xiaomi Mi 11 Lite 5G,,,,product,2.94612E+12,Xiaomi-2946120000000,1,10299,10,150,4,true,true,true,https://www.sanborns.com.mx/imagenes-sanborns-ii/1200/2005698250551.jpg
+Xiaomi 11T Pro,,,,product,9.11023E+12,Xiaomi-9110230000000,1,17999,10,150,4,true,true,true,https://mall.mistoremx.com/data/gallery_album/155/original_img/1643949346559074532.webp
+Xiaomi Mi 11 Lite 4G,,,,product,5.04561E+12,Xiaomi-5045610000000,1,9499,10,150,4,true,true,true,https://www.sanborns.com.mx/imagenes-sanborns-ii/1200/2005698249425.jpg
+Poco F3 5G,,,,product,1.7497E+12,Poco-1749700000000,1,8699,10,150,4,true,true,true,https://http2.mlstatic.com/D_NQ_NP_822860-MLA48493702898_122021-O.jpg
+Oppo A53,,,,product,6.72417E+12,Oppo-6724170000000,1,5999,10,150,4,true,true,true,https://i.blogs.es/45b15e/oppoa53b/450_1000.jpg
+Oppo A93,,,,product,7.46E+12,Oppo-7460000000000,1,9489,10,150,4,true,true,true,https://www.sanborns.com.mx/imagenes-sanborns-ii/1200/2005692355337_4.jpg
+Oppo Reno 6 Lite,,,,product,1.14375E+12,Oppo-1143750000000,1,8799,10,150,4,true,true,true,https://mobomx.vteximg.com.br/arquivos/ids/181823-600-600/OPPOReno6LitePlataDual.jpg?v=637770946000870000
+Oppo Reno 6,,,,product,5.316E+12,Oppo-5316000000000,1,15999,10,150,4,true,true,true,https://www.sanborns.com.mx/imagenes-sanborns-ii/1200/2005699865655.jpg
+Oppo Reno 5 Z,,,,product,3.52415E+12,Oppo-3524150000000,1,11999,10,150,4,true,true,true,https://www.sanborns.com.mx/imagenes-sanborns-ii/1200/2005696226923.jpg
+Oppo Reno 5 Lite,,,,product,2.36046E+12,Oppo-2360460000000,1,8499,10,150,4,true,true,true,https://www.sanborns.com.mx/imagenes-sanborns-ii/1200/2005696226169_6.jpg

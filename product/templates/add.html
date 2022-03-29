@@ -1,0 +1,107 @@
+{% include "layout/header.html" %}
+  <!-- ======= Contact Section ======= -->
+  <section style=" background: url('https://images.pexels.com/photos/2678456/pexels-photo-2678456.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940') top center; background-size: cover;">
+  
+  </section>
+  <section id="contact" class="contact">
+    <div class="container">
+      
+
+      <div class="section-title">
+        <h2>Agregar vuelo</h2>
+        <p>Si deseas agregar algún vuelo hazlo desde la comodidad de tu hogar en nuestra página web o si deseas visitanos en el Aeropuerto Internacional de Mérida.</p>
+      </div>
+    </div>
+    <div class="container">
+      
+      <div class="row mt-5">
+
+        <div class="col-lg-4">
+          <div class="info">
+            <div class="address">
+              <i class="ri-map-pin-line"></i>
+              <h4>Location:</h4>
+              <p>A108 Adam Street, New York, NY 535022</p>
+            </div>
+            <div class="email">
+              <i class="ri-mail-line"></i>
+              <h4>Email:</h4>
+              <p>info@example.com</p>
+            </div>
+
+            <div class="phone">
+              <i class="ri-phone-line"></i>
+              <h4>Call:</h4>
+              <p>+1 5589 55488 55s</p>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="col-lg-8 mt-5 mt-lg-0">
+
+          <form action="/flightadd" method="POST" role="form" >
+            <div class="form-row">
+              <div class="col-md-6 form-group">
+                <input type="text" name="name" class="form-control" id="name" placeholder="Nombre" data-msg="Please enter at least 4 chars" required />
+                <div class="validate"></div>
+              </div>
+              <div class="col-md-6 form-group">
+                <input type="text" class="form-control" name="description" id="description" placeholder="Descripcion"  data-msg="Please enter a valid email" required />
+                <div class="validate"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="description_purchase" id="description_purchase" placeholder="Descripcion purchase"  data-msg="Please enter at least 8 chars of subject" required />
+              <div class="validate"></div>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="description_sale" id="description_sale" placeholder="Descripcion sale"  data-msg="Please enter at least 8 chars of subject" required />
+              <div class="validate"></div>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="type" id="type" placeholder="Tipo"  data-msg="Please enter at least 8 chars of subject" required/>
+                <div class="validate"></div>
+              </div>
+              <div class="form-group">
+                <input type="number" class="form-control" name="barcode" id="barcode" placeholder="Barcode"  data-msg="Please enter at least 8 chars of subject" required/>
+                <div class="validate"></div>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" name="default_code" id="default_code" placeholder="Default code"  data-msg="Please enter at least 8 chars of subject" required/>
+                <div class="validate"></div>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" name="categ_id" id="categ_id" placeholder="ID categoria"  data-msg="Please enter at least 8 chars of subject" required/>
+                <div class="validate"></div>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" name="list_price" id="list_price" placeholder="Precio"  data-msg="Please enter at least 8 chars of subject" required/>
+                <div class="validate"></div>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" name="volume" id="volume" placeholder="Volumen"  data-msg="Please enter at least 8 chars of subject" required/>
+                <div class="validate"></div>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" name="weight" id="weight" placeholder="weight"  data-msg="Please enter at least 8 chars of subject" required/>
+                <div class="validate"></div>
+              </div>
+            
+            <div class="text-center"><button type="submit" style="background: #009961;
+              border: 0;
+              padding: 10px 30px;
+              color: #fff;
+              transition: 0.4s;
+              border-radius: 50px">Agregar</button></div>
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section><!-- End Contact Section -->
+  {% include "layout/footer.html" %}
+

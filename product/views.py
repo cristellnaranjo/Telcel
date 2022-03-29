@@ -43,9 +43,30 @@ def viewproducts(request):
     }
     
         
-    # return HttpResponse(xx)
-    return render(request ,"products/list.html",data)
+    # return HttpResponse(products)
+    return render(request ,"flights.html",data)
  
+def viewproduct(request, id):
+    odoo = connectionOdoo()
+    products =  odoo.models.execute_kw(
+    odoo.db
+    ,odoo.uid,
+    odoo.password,
+    'product.template','search_read',
+    [
+        [
+            [ "id" ,"=", id]
+        ]
+    ],
+    {'fields': []}
+)
+ 
+    data = products
+    
+        
+    # return HttpResponse(data['products'])
+    return render(request ,"get.html", data)
+
 def createProduct(request):
     url = os.getenv("URL_ODOO")
     db =  os.getenv("DB_ODOO")
@@ -83,12 +104,24 @@ def updateProduct(request):
         }])
     return HttpResponse("updated")
     
-def createCsvProducts(name, defaultCode, listPrice, companyId):
+def createCsvProducts(name, description, description_purchase, description_sale, type, barcode, defaultCode, categ_id, listPrice, volume, weight, companyId, sale_ok, purchase_ok, active, imagen):
     self = connectionOdoo()
     id = self.models.execute_kw(self.db, self.uid, self.password, 'product.template', 'create',
                                 [
                                     {
                                         'name': name,
+                                        'description': description,
+                                        'description_purchase': description_purchase,
+                                        'description_sale': description_sale,
+                                        'type':type,
+                                        'barcode': barcode,
+                                        'categ_id': categ_id,
+                                        'volume': volume,
+                                        'weight': weight,
+                                        'sale_ok':sale_ok,
+                                        'purchase_ok':purchase_ok,
+                                        'active': active,
+                                        'description_picking':imagen,
                                         'default_code': defaultCode,
                                         'list_price': listPrice,
                                         'company_id': companyId
@@ -102,7 +135,7 @@ def AddProductsCSV(request):
 
     print(df.to_numpy()[0])
     for i in range(len(df.to_numpy())):
-        createCsvProducts(df.to_numpy()[i][0], df.to_numpy()[i][1], df.to_numpy()[i][2], df.to_numpy()[i][3])
+        createCsvProducts(df.to_numpy()[i][0], df.to_numpy()[i][1], df.to_numpy()[i][2], df.to_numpy()[i][3], df.to_numpy()[i][4], df.to_numpy()[i][5], df.to_numpy()[i][6], df.to_numpy()[i][7], df.to_numpy()[i][8], df.to_numpy()[i][9], df.to_numpy()[i][10], df.to_numpy()[i][11], df.to_numpy()[i][12], df.to_numpy()[i][13], df.to_numpy()[i][14], df.to_numpy()[i][15])
     return HttpResponse("CVS agregado")
 
     return HttpResponse("No hay archivo")

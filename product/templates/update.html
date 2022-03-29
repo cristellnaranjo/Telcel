@@ -1,0 +1,84 @@
+{% include "layout/header.html" %}
+  <!-- ======= Contact Section ======= -->
+  <section style=" background: url('https://images.pexels.com/photos/2678456/pexels-photo-2678456.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940') top center; background-size: cover;">
+  
+  </section>
+  <section id="contact" class="contact">
+    <div class="container">
+      
+
+      <div class="section-title">
+        <h2>Editar vuelo</h2>
+        <p>Si deseas editar algún vuelo hazlo desde la comodidad de tu hogar en nuestra página web o si deseas visitanos en el Aeropuerto Internacional de Mérida.</p>
+      </div>
+    </div>
+    <div class="container">
+      
+      <div class="row mt-5">
+
+        <div class="col-lg-4">
+          <div class="info">
+            <div class="address">
+              <i class="ri-map-pin-line"></i>
+              <h4>Location:</h4>
+              <p>A108 Adam Street, New York, NY 535022</p>
+            </div>
+
+            <div class="email">
+              <i class="ri-mail-line"></i>
+              <h4>Email:</h4>
+              <p>info@example.com</p>
+            </div>
+
+            <div class="phone">
+              <i class="ri-phone-line"></i>
+              <h4>Call:</h4>
+              <p>+1 5589 55488 55s</p>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="col-lg-8 mt-5 mt-lg-0">
+
+          <form action="/flightupdate/{{flight.id}}" method="POST" role="form" >
+            <div class="form-row">
+              <div class="col-md-6 form-group">
+                <input value ="{{flight.origin}}"type="text" name="origin" class="form-control" id="origin" placeholder="Origen" data-msg="Please enter at least 4 chars" required />
+                <div class="validate"></div>
+              </div>
+              <div class="col-md-6 form-group">
+                <input value ="{{flight.destination}}" type="text" class="form-control" name="destination" id="destination" placeholder="Destino"  data-msg="Please enter a valid email" required />
+                <div class="validate"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <input value ="{{flight.price}}" type="number" class="form-control" name="price" id="price" placeholder="Precio"  data-msg="Please enter at least 8 chars of subject" required />
+              <div class="validate"></div>
+            </div>
+            <div class="form-group">
+                <input value ="{{flight.date}}" type="date" class="form-control" name="date" id="date" placeholder="Fecha"  data-msg="Please enter at least 8 chars of subject" required/>
+                <div class="validate"></div>
+              </div>
+              <div class="form-group">
+                <input value ="{{flight.time}}" type="time" class="form-control" name="time" id="time" placeholder="Hora"  data-msg="Please enter at least 8 chars of subject" required/>
+                <div class="validate"></div>
+              </div>
+            <div class="text-center"><button type="submit" style="background: #009961;
+              border: 0;
+              padding: 10px 30px;
+              color: #fff;
+              transition: 0.4s;
+              border-radius: 50px">Actualizar</button></div>
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section><!-- End Contact Section -->
+  
+  {% include "layout/footer.html" %}
+
