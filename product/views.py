@@ -1,9 +1,11 @@
 from itertools import product
-from django.shortcuts import render
+from django.shortcuts import render, redirect, HttpResponse
 from django.http import HttpResponse, response
+from django.http import JsonResponse
+
+
 # import requests
 import xmlrpc.client
-import json
 import base64
 import sys
 import json 
@@ -70,41 +72,71 @@ def viewproduct(request, id):
     return render(request ,"get.html", data)
 
 def createProduct(request):
-    url = os.getenv("URL_ODOO")
-    db =  os.getenv("DB_ODOO")
-    password =  os.getenv("PASSWORD_ODOO")
- 
-    models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
-    common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
-    output = common.version()
-    uid = common.authenticate(db, os.getenv("USERNAME_ODOO"), password, output)
- 
-    id = models.execute_kw(db, uid, password, 'product.template', 'create', [{
-    'name': "Producto DJANGO companyID",
-    'default_code':"test_default_code_DJANGO",
-    'list_price':"100",
-    "company_id":1
-    }])
-    return HttpResponse(id)
+
+    return render(request, 'add.html')
+
  
 def deleteProduct(request, id):
-    url = os.getenv("URL_ODOO")
-    db =  os.getenv("DB_ODOO")
-    password =  os.getenv("PASSWORD_ODOO")
-    models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
-    common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
-    output =  common.version()
-    uid = common.authenticate(db, os.getenv("USERNAME_ODOO"), password, output)
-    models.execute_kw(db, uid, password, 'product.template', 'unlink', [[id]])
+    # url = os.getenv("URL_ODOO")
+    # db =  os.getenv("DB_ODOO")
+    # password =  os.getenv("PASSWORD_ODOO")
+    # models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
+    # common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
+    # output =  common.version()
+    # uid = common.authenticate(db, os.getenv("USERNAME_ODOO"), password, output)
+
+    odoo = connectionOdoo()
+    products =  odoo.models.execute_kw(
+    odoo.db
+    ,odoo.uid,
+    odoo.password, 'product.template', 'unlink', [[id]])
+    return redirect("/")
     return HttpResponse("deleted")
  
-def updateProduct(request):
+def update(request,id):
     odoo = connectionOdoo()
-    odoo.models.execute_kw(odoo.db, odoo.uid, odoo.password, 'product.template', 'write', [[43], {
-    'name': "Newer partner",
-    "price":"4567"
-        }])
-    return HttpResponse("updated")
+    products =  odoo.models.execute_kw(
+    odoo.db
+    ,odoo.uid,
+    odoo.password,
+    'product.template','search_read',
+    [
+        [
+            [ "id" ,"=", id]
+        ]
+    ],
+    {'fields': []}
+)
+ 
+    data = {
+        "products":products
+    }
+    return render(request, 'update.html', data)
+def updateProduct(request, id):
+    datos = request.POST
+    # datos = {
+    #     "products": request.POST
+    # }
+    # return HttpResponse(datos['name'])
+
+    odoo = connectionOdoo()
+    odoo.models.execute_kw(odoo.db, odoo.uid, odoo.password, 'product.template', 'write', [[id], 
+        {
+            'name': datos['name'],
+            'description': datos['description'],
+            'description_purchase': datos['description_purchase'],
+            'description_sale': datos['description_sale'],
+            'type':datos['type'],
+            'barcode': datos['barcode'],
+            # 'categ_id': datos['categ_id'],
+            'volume': datos['volume'],
+            'weight': datos['weight'],
+            # 'description_picking':datos['imagen'],
+            'default_code': datos['default_code'],
+            'list_price': datos['list_price']
+        }
+    ])
+    return redirect('/get/' + str(id))
     
 def createCsvProducts(name, description, description_purchase, description_sale, type, barcode, defaultCode, categ_id, listPrice, volume, weight, companyId, sale_ok, purchase_ok, active, imagen):
     self = connectionOdoo()

@@ -3,10 +3,11 @@ from product.views import *
 
 urlpatterns = [
     # path('', viewproducts, name="products"),
-    path('products', viewproducts, name="products"),
-    path('create', createProduct, name="create"),
+    path('', viewproducts, name="products"),
+    path('add', createProduct, name="create"),
     path('delete/<int:id>', deleteProduct, name="delete"),
-    path('update', updateProduct, name="update"),
+    path('update/<int:id>', update, name="update"),
+    path('updateproduct/<int:id>', updateProduct, name="updateProduct"),
     path('create/cvs', AddProductsCSV, name="addcvs"),
     path('get/<int:id>',viewproduct ,name='product'),
 ]
