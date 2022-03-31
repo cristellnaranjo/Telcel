@@ -36,7 +36,7 @@ def viewproducts(request):
         ]
     ],
     {'fields': []}
-)
+) 
  
     data = {
         "products":products
@@ -61,7 +61,9 @@ def viewproduct(request, id):
     {'fields': []}
 )
  
-    data = products
+    data = {
+        "products":products
+    }
     
         
     # return HttpResponse(data['products'])

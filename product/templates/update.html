@@ -42,35 +42,61 @@
 
         <div class="col-lg-8 mt-5 mt-lg-0">
 
-          <form action="/flightupdate/{{flight.id}}" method="POST" role="form" >
+          
+          <form action="/update/{{data.id}}" method="POST" role="form" >
             <div class="form-row">
               <div class="col-md-6 form-group">
-                <input value ="{{flight.origin}}"type="text" name="origin" class="form-control" id="origin" placeholder="Origen" data-msg="Please enter at least 4 chars" required />
+                <input  value ="{{data.name}}" type="text" name="name" class="form-control" id="name" placeholder="Nombre" data-msg="Please enter at least 4 chars" required />
                 <div class="validate"></div>
               </div>
               <div class="col-md-6 form-group">
-                <input value ="{{flight.destination}}" type="text" class="form-control" name="destination" id="destination" placeholder="Destino"  data-msg="Please enter a valid email" required />
+                <input value ="{{data.description}}" type="text" class="form-control" name="description" id="description" placeholder="Descripcion"  data-msg="Please enter a valid email" required />
                 <div class="validate"></div>
               </div>
             </div>
             <div class="form-group">
-              <input value ="{{flight.price}}" type="number" class="form-control" name="price" id="price" placeholder="Precio"  data-msg="Please enter at least 8 chars of subject" required />
+              <input value ="{{data.description_purchase}}" type="text" class="form-control" name="description_purchase" id="description_purchase" placeholder="Descripcion purchase"  data-msg="Please enter at least 8 chars of subject" required />
               <div class="validate"></div>
             </div>
             <div class="form-group">
-                <input value ="{{flight.date}}" type="date" class="form-control" name="date" id="date" placeholder="Fecha"  data-msg="Please enter at least 8 chars of subject" required/>
+              <input value ="{{data.description_sale}}" type="text" class="form-control" name="description_sale" id="description_sale" placeholder="Descripcion sale"  data-msg="Please enter at least 8 chars of subject" required />
+              <div class="validate"></div>
+            </div>
+            <div class="form-group">
+                <input value ="{{data.type}}" type="text" class="form-control" name="type" id="type" placeholder="Tipo"  data-msg="Please enter at least 8 chars of subject" required/>
                 <div class="validate"></div>
               </div>
               <div class="form-group">
-                <input value ="{{flight.time}}" type="time" class="form-control" name="time" id="time" placeholder="Hora"  data-msg="Please enter at least 8 chars of subject" required/>
+                <input value ="{{data.barcode}}" type="number" class="form-control" name="barcode" id="barcode" placeholder="Barcode"  data-msg="Please enter at least 8 chars of subject" required/>
                 <div class="validate"></div>
               </div>
+              <div class="form-group">
+                <input value ="{{data.default_code}}" type="text" class="form-control" name="default_code" id="default_code" placeholder="Default code"  data-msg="Please enter at least 8 chars of subject" required/>
+                <div class="validate"></div>
+              </div>
+              <div class="form-group">
+                <input value ="{{data.categ_id}}" type="text" class="form-control" name="categ_id" id="categ_id" placeholder="ID categoria"  data-msg="Please enter at least 8 chars of subject" required/>
+                <div class="validate"></div>
+              </div>
+              <div class="form-group">
+                <input value ="{{data.list_price}}" type="text" class="form-control" name="list_price" id="list_price" placeholder="Precio"  data-msg="Please enter at least 8 chars of subject" required/>
+                <div class="validate"></div>
+              </div>
+              <div class="form-group">
+                <input value ="{{data.volume}}" type="text" class="form-control" name="volume" id="volume" placeholder="Volumen"  data-msg="Please enter at least 8 chars of subject" required/>
+                <div class="validate"></div>
+              </div>
+              <div class="form-group">
+                <input value ="{{data.weight}}" type="text" class="form-control" name="weight" id="weight" placeholder="weight"  data-msg="Please enter at least 8 chars of subject" required/>
+                <div class="validate"></div>
+              </div>
+            
             <div class="text-center"><button type="submit" style="background: #009961;
               border: 0;
               padding: 10px 30px;
               color: #fff;
               transition: 0.4s;
-              border-radius: 50px">Actualizar</button></div>
+              border-radius: 50px">Agregar</button></div>
           </form>
 
         </div>
