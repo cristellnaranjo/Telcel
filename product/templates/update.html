@@ -45,15 +45,13 @@
           
           {% for data in products %}
           <form action="/updateproduct/{{data.id}}" method="POST" role="form" >
-            <div class="form-row">
-              <div class="col-md-6 form-group">
-                <input  value ="{{data.name}}" type="text" name="name" class="form-control" id="name" placeholder="Nombre" data-msg="Please enter at least 4 chars" required />
-                <div class="validate"></div>
-              </div>
-              <div class="col-md-6 form-group">
-                <input value ="{{data.description}}" type="text" class="form-control" name="description" id="description" placeholder="Descripcion"  data-msg="Please enter a valid email" required />
-                <div class="validate"></div>
-              </div>
+            <div class="form-group">
+              <input  value ="{{data.name}}" type="text" class="form-control" name="name" id="name" placeholder="Name"  data-msg="Please enter at least 8 chars of subject" required />
+              <div class="validate"></div>
+            </div>
+            <div class="form-group">
+              <input  value ="{{data.description}}"  type="text" class="form-control" name="description" id="description" placeholder="Descripciony"  data-msg="Please enter at least 8 chars of subject" required />
+              <div class="validate"></div>
             </div>
             <div class="form-group">
               <input value ="{{data.description_purchase}}" type="text" class="form-control" name="description_purchase" id="description_purchase" placeholder="Descripcion purchase"  data-msg="Please enter at least 8 chars of subject" required />
@@ -91,13 +89,17 @@
                 <input value ="{{data.weight}}" type="text" class="form-control" name="weight" id="weight" placeholder="weight"  data-msg="Please enter at least 8 chars of subject" required/>
                 <div class="validate"></div>
               </div>
+              <div class="form-group">
+                <input value ="{{data.description_picking}}" type="text" class="form-control" name="imagen" id="imagen" placeholder="Url imagen"  data-msg="Please enter at least 8 chars of subject" required/>
+                <div class="validate"></div>
+              </div>
             
             <div class="text-center"><button type="submit" style="background: #009961;
               border: 0;
               padding: 10px 30px;
               color: #fff;
               transition: 0.4s;
-              border-radius: 50px">Agregar</button></div>
+              border-radius: 50px">Editar</button></div>
           </form>
           {% endfor %}
 

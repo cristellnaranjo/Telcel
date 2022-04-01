@@ -75,6 +75,10 @@ def createProduct(request):
 
     return render(request, 'add.html')
 
+def login(request):
+
+    return render(request, 'login.html')
+
  
 def deleteProduct(request, id):
     # url = os.getenv("URL_ODOO")
@@ -90,7 +94,7 @@ def deleteProduct(request, id):
     odoo.db
     ,odoo.uid,
     odoo.password, 'product.template', 'unlink', [[id]])
-    return redirect("/")
+    return redirect("/products")
     return HttpResponse("deleted")
  
 def update(request,id):
@@ -131,7 +135,7 @@ def updateProduct(request, id):
             # 'categ_id': datos['categ_id'],
             'volume': datos['volume'],
             'weight': datos['weight'],
-            # 'description_picking':datos['imagen'],
+            'description_picking':datos['imagen'],
             'default_code': datos['default_code'],
             'list_price': datos['list_price']
         }
