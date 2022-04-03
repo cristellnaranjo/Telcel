@@ -1144,7 +1144,7 @@ section {
 }
 
 .faq .img {
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
   min-height: 400px;
