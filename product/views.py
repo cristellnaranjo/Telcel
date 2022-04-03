@@ -19,12 +19,8 @@ from .connectionOdoo import *
  
 from dotenv import load_dotenv
 load_dotenv()
-# from dotenv import load_dotenv
- 
-# Create your views here.
+
 def viewproducts(request):
-    #return HttpResponse(socket.gethostbyname(socket.gethostname()))
-    
     odoo = connectionOdoo()
     products =  odoo.models.execute_kw(
     odoo.db
@@ -34,7 +30,6 @@ def viewproducts(request):
     [
         [
             [ "company_id" ,"=", 4]
-            # [ "id" ,"=", 2]
         ]
     ],
     {'fields': []}
@@ -44,8 +39,6 @@ def viewproducts(request):
         "products":products
     }
     
-        
-    # return HttpResponse(products)
     return render(request ,"flights.html",data)
  
 def viewproduct(request, id):
@@ -66,14 +59,27 @@ def viewproduct(request, id):
     data = {
         "products":products
     }
-    
-        
-    # return HttpResponse(data['products'])
     return render(request ,"get.html", data)
 
 def createProduct(request):
 
     return render(request, 'add.html')
+
+def create(request):
+    datos = request.POST
+    odoo = connectionOdoo()
+    odoo.models.execute_kw(odoo.db, odoo.uid, odoo.password, 'product.template', 'create', [
+        {
+            'name': datos['name'],
+            'description': datos['description'],
+            'barcode': datos['barcode'],
+            'description_picking':datos['description_picking'],
+            'default_code': datos['default_code'],
+            'list_price': datos['list_price'],
+            'company_id': 4
+        }
+    ])
+    return redirect('/products')
 
 def login(request):
 
@@ -81,14 +87,6 @@ def login(request):
 
  
 def deleteProduct(request, id):
-    # url = os.getenv("URL_ODOO")
-    # db =  os.getenv("DB_ODOO")
-    # password =  os.getenv("PASSWORD_ODOO")
-    # models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
-    # common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
-    # output =  common.version()
-    # uid = common.authenticate(db, os.getenv("USERNAME_ODOO"), password, output)
-
     odoo = connectionOdoo()
     products =  odoo.models.execute_kw(
     odoo.db
@@ -118,11 +116,6 @@ def update(request,id):
     return render(request, 'update.html', data)
 def updateProduct(request, id):
     datos = request.POST
-    # datos = {
-    #     "products": request.POST
-    # }
-    # return HttpResponse(datos['name'])
-
     odoo = connectionOdoo()
     odoo.models.execute_kw(odoo.db, odoo.uid, odoo.password, 'product.template', 'write', [[id], 
         {
@@ -175,11 +168,3 @@ def AddProductsCSV(request):
     for i in range(len(df.to_numpy())):
         createCsvProducts(df.to_numpy()[i][0], df.to_numpy()[i][1], df.to_numpy()[i][2], df.to_numpy()[i][3], df.to_numpy()[i][4], df.to_numpy()[i][5], df.to_numpy()[i][6], df.to_numpy()[i][7], df.to_numpy()[i][8], df.to_numpy()[i][9], df.to_numpy()[i][10], df.to_numpy()[i][11], df.to_numpy()[i][12], df.to_numpy()[i][13], df.to_numpy()[i][14], df.to_numpy()[i][15])
     return HttpResponse("CVS agregado")
-
-    return HttpResponse("No hay archivo")
-
-
-# check if the deleted record is still in the database
-    # models.execute_kw(db, uid, password,
-    #     'res.partner', 'search', [[['id', '=', id]]])
-   
