@@ -5,7 +5,7 @@ from django.contrib import admin
 
 urlpatterns = [
     path('admin',admin.site.urls),
-    path('', LoginView.as_view(template_name='login.html'), name='login'),
+    path('login', LoginView.as_view(template_name='login.html'), name='login'),
     path('products', viewproducts, name="products"),
     path('add', createProduct, name="add"),
     path('delete/<int:id>', deleteProduct, name="delete"),
@@ -14,4 +14,5 @@ urlpatterns = [
     path('create', create, name="create"),
     path('create/cvs', AddProductsCSV, name="csv"),
     path('get/<int:id>',viewproduct ,name='product'),
+    path('logout',logoutview ,name='logout'),
 ]

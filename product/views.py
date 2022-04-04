@@ -2,6 +2,8 @@ from itertools import product
 from django.shortcuts import render, redirect, HttpResponse
 from django.http import HttpResponse, response
 from django.http import JsonResponse
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 
 
 # import requests
@@ -20,6 +22,7 @@ from .connectionOdoo import *
 from dotenv import load_dotenv
 load_dotenv()
 
+@login_required
 def viewproducts(request):
     odoo = connectionOdoo()
     products =  odoo.models.execute_kw(
@@ -168,3 +171,7 @@ def AddProductsCSV(request):
     for i in range(len(df.to_numpy())):
         createCsvProducts(df.to_numpy()[i][0], df.to_numpy()[i][1], df.to_numpy()[i][2], df.to_numpy()[i][3], df.to_numpy()[i][4], df.to_numpy()[i][5], df.to_numpy()[i][6], df.to_numpy()[i][7], df.to_numpy()[i][8], df.to_numpy()[i][9], df.to_numpy()[i][10], df.to_numpy()[i][11], df.to_numpy()[i][12], df.to_numpy()[i][13], df.to_numpy()[i][14], df.to_numpy()[i][15])
     return HttpResponse("CVS agregado")
+
+def logoutview(request):
+    logout(request)
+    return redirect('/')
