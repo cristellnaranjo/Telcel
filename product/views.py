@@ -174,4 +174,4 @@ def AddProductsCSV(request):
 
 def logoutview(request):
     logout(request)
-    return redirect('/')
+    return redirect('/login')
