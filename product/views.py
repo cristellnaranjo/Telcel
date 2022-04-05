@@ -23,26 +23,34 @@ from dotenv import load_dotenv
 load_dotenv()
 
 @login_required
+
+
 def viewproducts(request):
     odoo = connectionOdoo()
-    products =  odoo.models.execute_kw(
-    odoo.db
-    ,odoo.uid,
-    odoo.password,
-    'product.template','search_read',
-    [
+    try:
+        products =  odoo.models.execute_kw(
+        odoo.db
+        ,odoo.uid,
+        odoo.password,
+        'product.template','search_read',
         [
-            [ "company_id" ,"=", 4]
-        ]
-    ],
-    {'fields': []}
-) 
- 
-    data = {
-        "products":products
-    }
+            [
+                [ "company_id" ,"=", 4]
+            ]
+        ],
+        {'fields': []}
+    )   
     
-    return render(request ,"flights.html",data)
+        data = {
+            "products":products
+        }
+    
+        return render(request ,"flights.html",data)
+        return JsonResponse({"message": "Ok"})
+    except:
+        return JsonResponse({"message":"Error"})
+
+    
  
 def viewproduct(request, id):
     odoo = connectionOdoo()
@@ -119,25 +127,29 @@ def update(request,id):
     return render(request, 'update.html', data)
 def updateProduct(request, id):
     datos = request.POST
-    odoo = connectionOdoo()
-    odoo.models.execute_kw(odoo.db, odoo.uid, odoo.password, 'product.template', 'write', [[id], 
-        {
-            'name': datos['name'],
-            'description': datos['description'],
-            'description_purchase': datos['description_purchase'],
-            'description_sale': datos['description_sale'],
-            'type':datos['type'],
-            'barcode': datos['barcode'],
-            # 'categ_id': datos['categ_id'],
-            'volume': datos['volume'],
-            'weight': datos['weight'],
-            'description_picking':datos['imagen'],
-            'default_code': datos['default_code'],
-            'list_price': datos['list_price']
-        }
-    ])
-    return redirect('/get/' + str(id))
-    
+    # return JsonResponse(datos)
+    try:
+        odoo = connectionOdoo()
+        odoo.models.execute_kw(odoo.db, odoo.uid, odoo.password, 'product.template', 'write', [[id], 
+            {
+                'name': datos['name'],
+                'description': datos['description'],
+                'description_purchase': datos['description_purchase'],
+                'description_sale': datos['description_sale'],
+                'type':datos['type'],
+                'barcode': datos['barcode'],
+                # 'categ_id': datos['categ_id'],
+                'volume': datos['volume'],
+                'weight': datos['weight'],
+                'description_picking':datos['imagen'],
+                'default_code': datos['default_code'],
+                'list_price': datos['list_price']
+            }
+        ])
+        return JsonResponse({"message":"Ok"})
+        return redirect('/get/' + str(id))
+    except:
+        return JsonResponse({"message":"Error"})
 def createCsvProducts(name, description, description_purchase, description_sale, type, barcode, defaultCode, categ_id, listPrice, volume, weight, companyId, sale_ok, purchase_ok, active, imagen):
     self = connectionOdoo()
     id = self.models.execute_kw(self.db, self.uid, self.password, 'product.template', 'create',
