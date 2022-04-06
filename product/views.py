@@ -23,27 +23,34 @@ from dotenv import load_dotenv
 load_dotenv()
 
 @login_required
+
+
 def viewproducts(request):
     odoo = connectionOdoo()
-    products =  odoo.models.execute_kw(
-    odoo.db
-    ,odoo.uid,
-    odoo.password,
-    'product.template','search_read',
-    [
+    try:
+        products =  odoo.models.execute_kw(
+        odoo.db
+        ,odoo.uid,
+        odoo.password,
+        'product.template','search_read',
         [
-            [ "company_id" ,"=", 4]
-        ]
-    ],
-    {'fields': []}
-) 
- 
-    data = {
-        "products":products
-    }
+            [
+                [ "company_id" ,"=", 4]
+            ]
+        ],
+        {'fields': []}
+    )   
     
-    return render(request ,"flights.html",data)
+        data = {
+            "products":products
+        }
+    
+        return render(request ,"flights.html",data)
+        return JsonResponse({"message": "Ok"})
+    except:
+        return JsonResponse({"message":"Error"})
 
+    
 @login_required
 def viewproduct(request, id):
     odoo = connectionOdoo()
@@ -73,29 +80,37 @@ def createProduct(request):
 @login_required
 def create(request):
     datos = request.POST
-    odoo = connectionOdoo()
-    odoo.models.execute_kw(odoo.db, odoo.uid, odoo.password, 'product.template', 'create', [
-        {
-            'name': datos['name'],
-            'description': datos['description'],
-            'barcode': datos['barcode'],
-            'description_picking':datos['description_picking'],
-            'default_code': datos['default_code'],
-            'list_price': datos['list_price'],
-            'company_id': 4
-        }
-    ])
-    return redirect('/products')
+    try:
+        odoo = connectionOdoo()
+        odoo.models.execute_kw(odoo.db, odoo.uid, odoo.password, 'product.template', 'create', [
+            {
+                'name': datos['name'],
+                'description': datos['description'],
+                'barcode': datos['barcode'],
+                'description_picking':datos['description_picking'],
+                'default_code': datos['default_code'],
+                'list_price': datos['list_price'],
+                'company_id': 4
+            }
+        ])
+        return JsonResponse({"message": "Se agrego"})
+    except:
+        return JsonResponse({"message": "Error"})
+
+        return redirect('/products')
 
 @login_required
 def deleteProduct(request, id):
-    odoo = connectionOdoo()
-    products =  odoo.models.execute_kw(
-    odoo.db
-    ,odoo.uid,
-    odoo.password, 'product.template', 'unlink', [[id]])
-    return redirect("/products")
-    return HttpResponse("deleted")
+    try:
+        odoo = connectionOdoo()
+        products =  odoo.models.execute_kw(
+        odoo.db
+        ,odoo.uid,
+        odoo.password, 'product.template', 'unlink', [[id]])
+        return JsonResponse({"message":"Borrado", "ID":id})
+        return redirect("/products")
+    except:
+        return JsonResponse({"message":"Error", "ID":id})
  
 @login_required
 def update(request,id):
@@ -121,26 +136,29 @@ def update(request,id):
 @login_required
 def updateProduct(request, id):
     datos = request.POST
-    odoo = connectionOdoo()
-    odoo.models.execute_kw(odoo.db, odoo.uid, odoo.password, 'product.template', 'write', [[id], 
-        {
-            'name': datos['name'],
-            'description': datos['description'],
-            'description_purchase': datos['description_purchase'],
-            'description_sale': datos['description_sale'],
-            'type':datos['type'],
-            'barcode': datos['barcode'],
-            # 'categ_id': datos['categ_id'],
-            'volume': datos['volume'],
-            'weight': datos['weight'],
-            'description_picking':datos['imagen'],
-            'default_code': datos['default_code'],
-            'list_price': datos['list_price']
-        }
-    ])
-    return redirect('/get/' + str(id))
-
-@login_required
+    # return JsonResponse(datos)
+    try:
+        odoo = connectionOdoo()
+        odoo.models.execute_kw(odoo.db, odoo.uid, odoo.password, 'product.template', 'write', [[id], 
+            {
+                'name': datos['name'],
+                'description': datos['description'],
+                'description_purchase': datos['description_purchase'],
+                'description_sale': datos['description_sale'],
+                'type':datos['type'],
+                'barcode': datos['barcode'],
+                # 'categ_id': datos['categ_id'],
+                'volume': datos['volume'],
+                'weight': datos['weight'],
+                'description_picking':datos['imagen'],
+                'default_code': datos['default_code'],
+                'list_price': datos['list_price']
+            }
+        ])
+        return JsonResponse({"message":"Ok"})
+        return redirect('/get/' + str(id))
+    except:
+        return JsonResponse({"message":"Error"})
 def createCsvProducts(name, description, description_purchase, description_sale, type, barcode, defaultCode, categ_id, listPrice, volume, weight, companyId, sale_ok, purchase_ok, active, imagen):
     self = connectionOdoo()
     id = self.models.execute_kw(self.db, self.uid, self.password, 'product.template', 'create',
@@ -177,4 +195,6 @@ def AddProductsCSV(request):
 
 def logoutview(request):
     logout(request)
+    return redirect('/login')
+def redirec(request):
     return redirect('/login')

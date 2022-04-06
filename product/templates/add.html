@@ -41,7 +41,7 @@
 
         <div class="col-lg-8 mt-5 mt-lg-0">
 
-          <form action="/create" method="POST" role="form" >
+          <form method="POST" role="form" id="form" >
             <div class="form-group">
               <input type="text" class="form-control" name="name" id="name" placeholder="Name"  data-msg="Please enter at least 8 chars of subject" required />
               <div class="validate"></div>
@@ -98,6 +98,37 @@
               transition: 0.4s;
               border-radius: 50px">Agregar</button></div>
           </form>
+
+          {% block javascript %}
+          <script>
+            $("#form").submit(function(e){
+              e.preventDefault();
+              var serializedData = $(this).serialize();
+              var post_url = $("form").data("post-url");
+              console.log(post_url);
+              console.log(serializedData);
+              
+              
+              $.ajax({
+                url : "/create",
+                type : "POST",
+                data : serializedData,
+                beforeSend: function () {
+                  // loading("Guardando productos")
+                  console.log("Cargando")
+                },
+                success: function(response){
+                  console.log(response)
+                  
+                },
+                error: function (err) {
+                  console.log(err);
+                },
+              });
+              return false;
+            });
+          </script>
+          {% endblock javascript %}
 
         </div>
 

@@ -44,7 +44,7 @@
 
           
           {% for data in products %}
-          <form action="/updateproduct/{{data.id}}" method="POST" role="form" >
+          <form id="update_form" method="POST" data-post-url="{% url 'products' %}" >
             <div class="form-group">
               <input  value ="{{data.name}}" type="text" class="form-control" name="name" id="name" placeholder="Name"  data-msg="Please enter at least 8 chars of subject" required />
               <div class="validate"></div>
@@ -101,12 +101,44 @@
               transition: 0.4s;
               border-radius: 50px">Editar</button></div>
           </form>
+          
+          
+          {% block javascript %}
+          <script>
+            $("#update_form").submit(function(e){
+              e.preventDefault();
+              var serializedData = $(this).serialize();
+              var post_url = $("update_form").data("post-url");
+              console.log(post_url);
+              console.log(serializedData + "");
+              console.log("{{data.id}}");
+              
+              
+              $.ajax({
+                url : "/updateproduct/{{data.id}}",
+                type : "POST",
+                data : serializedData,
+                beforeSend: function () {
+                  // loading("Guardando productos")
+                  console.log("Cargando")
+                },
+                success: function(response){
+                  console.log(response)
+                },
+                error: function (err) {
+                  console.log(err);
+                },
+              });
+              return false;
+            });
+          </script>
+          {% endblock javascript %}
           {% endfor %}
-
+          
         </div>
-
+        
       </div>
-
+      
     </div>
   </section><!-- End Contact Section -->
   
