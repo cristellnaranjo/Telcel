@@ -43,7 +43,8 @@ def viewproducts(request):
     }
     
     return render(request ,"flights.html",data)
- 
+
+@login_required
 def viewproduct(request, id):
     odoo = connectionOdoo()
     products =  odoo.models.execute_kw(
@@ -64,10 +65,12 @@ def viewproduct(request, id):
     }
     return render(request ,"get.html", data)
 
+@login_required
 def createProduct(request):
 
     return render(request, 'add.html')
 
+@login_required
 def create(request):
     datos = request.POST
     odoo = connectionOdoo()
@@ -84,11 +87,7 @@ def create(request):
     ])
     return redirect('/products')
 
-def login(request):
-
-    return render(request, 'login.html')
-
- 
+@login_required
 def deleteProduct(request, id):
     odoo = connectionOdoo()
     products =  odoo.models.execute_kw(
@@ -98,6 +97,7 @@ def deleteProduct(request, id):
     return redirect("/products")
     return HttpResponse("deleted")
  
+@login_required
 def update(request,id):
     odoo = connectionOdoo()
     products =  odoo.models.execute_kw(
@@ -117,6 +117,8 @@ def update(request,id):
         "products":products
     }
     return render(request, 'update.html', data)
+
+@login_required
 def updateProduct(request, id):
     datos = request.POST
     odoo = connectionOdoo()
@@ -137,7 +139,8 @@ def updateProduct(request, id):
         }
     ])
     return redirect('/get/' + str(id))
-    
+
+@login_required
 def createCsvProducts(name, description, description_purchase, description_sale, type, barcode, defaultCode, categ_id, listPrice, volume, weight, companyId, sale_ok, purchase_ok, active, imagen):
     self = connectionOdoo()
     id = self.models.execute_kw(self.db, self.uid, self.password, 'product.template', 'create',
@@ -162,7 +165,7 @@ def createCsvProducts(name, description, description_purchase, description_sale,
                                     }
                                 ])
     
-
+@login_required
 def AddProductsCSV(request):
     csv_file = os.path.join(os.path.dirname(__file__), 'productos.csv')
     df = pd.read_csv(csv_file)
