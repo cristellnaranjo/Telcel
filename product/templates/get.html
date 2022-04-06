@@ -47,7 +47,7 @@
                 
                 <div style="display:flex; justify-content: space-around">
                     <a href="/update/{{data.id}}"><button style=" width: 350px; border: 2px solid #009961; padding: 10px 30px; background: white; color: #009961; font-size: 14px; font-weight: 400; font-family: 'Raleway', sans-serif;font-weight: 600;transition: 0.4s;border-radius: 50px">Editar</button></a>
-                    <a href="/delete/{{data.id}}"><button style=" width:350px; border: 2px solid #009961; padding: 10px 30px; background: white; color: #009961; font-size: 14px; font-weight: 400; font-family: 'Raleway', sans-serif;font-weight: 600;transition: 0.4s;border-radius: 50px">Eliminar</button></a>
+                    <a onclick=eliminar()><button style=" width:350px; border: 2px solid #009961; padding: 10px 30px; background: white; color: #009961; font-size: 14px; font-weight: 400; font-family: 'Raleway', sans-serif;font-weight: 600;transition: 0.4s;border-radius: 50px">Eliminar</button></a>
               </div>
               </div>
               
@@ -58,6 +58,32 @@
           </div>
    
         </div>
+        {% block javascript %}
+          <script>
+            function eliminar(){
+              if(confirm("¿Seguro que quieres eliminar el producto?"))
+              {
+                $.ajax({
+                  url : "/delete/{{data.id}}",
+                  type : "POST",
+                  beforeSend: function () {
+                    // loading("Guardando productos")
+                    console.log("Cargando")
+                  },
+                  success: function(response){
+                    console.log(response)
+                    confirm("Se ha eliminado")
+                    window.location = "/products"
+                  },
+                  error: function (err) {
+                    console.log(err);
+                  },
+                });
+              }
+
+            }
+          </script>
+          {% endblock javascript %}
          {% endfor %}
       </section><!-- End Faq Section -->
       {% include "layout/footer.html" %}

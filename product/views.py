@@ -78,19 +78,24 @@ def createProduct(request):
 
 def create(request):
     datos = request.POST
-    odoo = connectionOdoo()
-    odoo.models.execute_kw(odoo.db, odoo.uid, odoo.password, 'product.template', 'create', [
-        {
-            'name': datos['name'],
-            'description': datos['description'],
-            'barcode': datos['barcode'],
-            'description_picking':datos['description_picking'],
-            'default_code': datos['default_code'],
-            'list_price': datos['list_price'],
-            'company_id': 4
-        }
-    ])
-    return redirect('/products')
+    try:
+        odoo = connectionOdoo()
+        odoo.models.execute_kw(odoo.db, odoo.uid, odoo.password, 'product.template', 'create', [
+            {
+                'name': datos['name'],
+                'description': datos['description'],
+                'barcode': datos['barcode'],
+                'description_picking':datos['description_picking'],
+                'default_code': datos['default_code'],
+                'list_price': datos['list_price'],
+                'company_id': 4
+            }
+        ])
+        return JsonResponse({"message": "Se agrego"})
+    except:
+        return JsonResponse({"message": "Error"})
+
+        return redirect('/products')
 
 def login(request):
 
@@ -98,13 +103,16 @@ def login(request):
 
  
 def deleteProduct(request, id):
-    odoo = connectionOdoo()
-    products =  odoo.models.execute_kw(
-    odoo.db
-    ,odoo.uid,
-    odoo.password, 'product.template', 'unlink', [[id]])
-    return redirect("/products")
-    return HttpResponse("deleted")
+    try:
+        odoo = connectionOdoo()
+        products =  odoo.models.execute_kw(
+        odoo.db
+        ,odoo.uid,
+        odoo.password, 'product.template', 'unlink', [[id]])
+        return JsonResponse({"message":"Borrado", "ID":id})
+        return redirect("/products")
+    except:
+        return JsonResponse({"message":"Error", "ID":id})
  
 def update(request,id):
     odoo = connectionOdoo()
@@ -186,4 +194,6 @@ def AddProductsCSV(request):
 
 def logoutview(request):
     logout(request)
+    return redirect('/login')
+def redirec(request):
     return redirect('/login')
