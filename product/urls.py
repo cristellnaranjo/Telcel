@@ -13,7 +13,7 @@ urlpatterns = [
     path('update/<int:id>', update, name="update"),
     path('updateproduct/<int:id>', updateProduct, name="updateProduct"),
     path('create', create, name="create"),
-    path('create/cvs', AddProductsCSV, name="csv"),
+    path('create/csv', AddProductsCSV, name="csv"),
     path('get/<int:id>',viewproduct ,name='product'),
     path('logout',logoutview ,name='logout'),
     path('password_reset', PasswordResetView.as_view(template_name='password_reset_form.html', html_email_template_name='password_reset_email.html'), name='password_reset'),

@@ -6,7 +6,11 @@
   <section id="contact" class="contact">
     <div class="container">
       
-
+      
+<form id="form-csv" method="post" >
+    <input type="file" id="fileContent" name="fileContent" accept=".csv" >
+    <button type = "submit" value = "submit">Subir</button>
+</form>
       <div class="section-title">
         <h2>Agregar vuelo</h2>
         <p>Si deseas agregar algún vuelo hazlo desde la comodidad de tu hogar en nuestra página web o si deseas visitanos en el Aeropuerto Internacional de Mérida.</p>
@@ -127,6 +131,27 @@
               });
               return false;
             });
+          </script>
+          <script>
+            $("#form-csv").submit(function(e){
+              e.preventDefault();
+              var dict =new FormData();
+              dict.append("fileContent",document.getElementById('fileContent').files[0]);
+              console.log(dict);
+              $.ajax({
+                  url:'/create/csv',
+                  type:'post',
+                  data:dict,
+                  processData: false,
+                  contentType: false,
+                  dataType:'JSON',
+                  success:function (arg) {
+                    console.log(arg)
+                  }
+              })
+
+
+            })
           </script>
           {% endblock javascript %}
 

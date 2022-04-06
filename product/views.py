@@ -1,3 +1,4 @@
+from email import message
 from itertools import product
 from django.shortcuts import render, redirect, HttpResponse
 from django.http import HttpResponse, response
@@ -12,6 +13,7 @@ import base64
 import sys
 import json 
 import os
+from numpy import true_divide
 import pandas as pd
 import csv
 
@@ -136,20 +138,14 @@ def update(request,id):
 @login_required
 def updateProduct(request, id):
     datos = request.POST
-    # return JsonResponse(datos)
     try:
         odoo = connectionOdoo()
         odoo.models.execute_kw(odoo.db, odoo.uid, odoo.password, 'product.template', 'write', [[id], 
             {
                 'name': datos['name'],
                 'description': datos['description'],
-                'description_purchase': datos['description_purchase'],
-                'description_sale': datos['description_sale'],
-                'type':datos['type'],
                 'barcode': datos['barcode'],
                 # 'categ_id': datos['categ_id'],
-                'volume': datos['volume'],
-                'weight': datos['weight'],
                 'description_picking':datos['imagen'],
                 'default_code': datos['default_code'],
                 'list_price': datos['list_price']
@@ -161,37 +157,59 @@ def updateProduct(request, id):
         return JsonResponse({"message":"Error"})
 def createCsvProducts(name, description, description_purchase, description_sale, type, barcode, defaultCode, categ_id, listPrice, volume, weight, companyId, sale_ok, purchase_ok, active, imagen):
     self = connectionOdoo()
-    id = self.models.execute_kw(self.db, self.uid, self.password, 'product.template', 'create',
-                                [
-                                    {
-                                        'name': name,
-                                        'description': description,
-                                        'description_purchase': description_purchase,
-                                        'description_sale': description_sale,
-                                        'type':type,
-                                        'barcode': barcode,
-                                        'categ_id': categ_id,
-                                        'volume': volume,
-                                        'weight': weight,
-                                        'sale_ok':sale_ok,
-                                        'purchase_ok':purchase_ok,
-                                        'active': active,
-                                        'description_picking':imagen,
-                                        'default_code': defaultCode,
-                                        'list_price': listPrice,
-                                        'company_id': companyId
-                                    }
-                                ])
+    try:
+        id = self.models.execute_kw(self.db, self.uid, self.password, 'product.template', 'create',
+                                    [
+                                        {
+                                            'name': name,
+                                            'description': description,
+                                            'description_purchase': description_purchase,
+                                            'description_sale': description_sale,
+                                            'type':type,
+                                            'barcode': barcode,
+                                            'categ_id': categ_id,
+                                            'volume': volume,
+                                            'weight': weight,
+                                            'sale_ok':sale_ok,
+                                            'purchase_ok':purchase_ok,
+                                            'active': active,
+                                            'description_picking':imagen,
+                                            'default_code': defaultCode,
+                                            'list_price': listPrice,
+                                            'company_id': companyId
+                                        }
+                                    ])
+        return True
+    except:
+        return False
     
 @login_required
 def AddProductsCSV(request):
-    csv_file = os.path.join(os.path.dirname(__file__), 'productos.csv')
-    df = pd.read_csv(csv_file)
 
-    print(df.to_numpy()[0])
-    for i in range(len(df.to_numpy())):
-        createCsvProducts(df.to_numpy()[i][0], df.to_numpy()[i][1], df.to_numpy()[i][2], df.to_numpy()[i][3], df.to_numpy()[i][4], df.to_numpy()[i][5], df.to_numpy()[i][6], df.to_numpy()[i][7], df.to_numpy()[i][8], df.to_numpy()[i][9], df.to_numpy()[i][10], df.to_numpy()[i][11], df.to_numpy()[i][12], df.to_numpy()[i][13], df.to_numpy()[i][14], df.to_numpy()[i][15])
-    return HttpResponse("CVS agregado")
+    try:
+        odoo = connectionOdoo()
+        csv_file = request.FILES["fileContent"]
+        df = pd.read_csv(csv_file, sep=',', delimiter=None, header="infer", names=None, index_col=False)
+
+    except:
+        return JsonResponse({"message":"Error 1"})
+    try:
+        cont = 0
+        for i in range(len(df.to_numpy())):
+            resp = createCsvProducts(df.to_numpy()[i][0], df.to_numpy()[i][1], df.to_numpy()[i][2], df.to_numpy()[i][3], df.to_numpy()[i][4], df.to_numpy()[i][5], df.to_numpy()[i][6], df.to_numpy()[i][7], df.to_numpy()[i][8], df.to_numpy()[i][9], df.to_numpy()[i][10], df.to_numpy()[i][11], df.to_numpy()[i][12], df.to_numpy()[i][13], df.to_numpy()[i][14], df.to_numpy()[i][15])
+            if resp:
+                cont = cont + 1
+    except:
+        return JsonResponse({"message":"Error 2"})
+        
+    if cont == len(df.to_numpy()):
+        return JsonResponse({"message": "Se agregaron todos los archivos"})
+    else: 
+        if cont == 0:
+            return JsonResponse({"message": "No se agrego ningun archivo"})
+        else:
+            return JsonResponse({"message": "Se agregaron " + cont + " archivos"})
+
 
 def logoutview(request):
     logout(request)
