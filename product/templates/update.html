@@ -104,6 +104,8 @@
                 },
                 success: function(response){
                   console.log(response)
+                  alert("Celular editado");
+                  window.location = "/get/{{data.id}}";
                 },
                 error: function (err) {
                   console.log(err);

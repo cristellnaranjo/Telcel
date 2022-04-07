@@ -67,7 +67,7 @@
                 <div class="validate"></div>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" name="list_price2" id="list_price2" placeholder="Precio de venta"  data-msg="Please enter at least 8 chars of subject" required/>
+                <input type="text" class="form-control" name="lis" id="lis" placeholder="Precio de venta"  data-msg="Please enter at least 8 chars of subject" required/>
                 <div class="validate"></div>
               </div>
               <div class="form-group">
@@ -103,6 +103,7 @@
                 },
                 success: function(response){
                   console.log(response)
+                  alert("Celular agregado");
                   
                 },
                 error: function (err) {

@@ -80,21 +80,29 @@ def createProduct(request):
 @login_required
 def create(request):
     datos = request.POST
+    da = {
+            'name': datos['name'],
+            'barcode': datos['barcode'],
+            'description': datos['description'],
+            'default_code': datos['default_code'],
+            'list_price': datos['list_price'],
+            'company_id': datos['company_id']
+    }
     try:
         odoo = connectionOdoo()
         odoo.models.execute_kw(odoo.db, odoo.uid, odoo.password, 'product.template', 'create', [
             {
-                'name': datos['name'],
-                'description': datos['description'],
-                'barcode': datos['barcode'],
-                'default_code': datos['default_code'],
-                'list_price': float(datos['list_price'])*1.16,
-                'company_id': datos['companyId']
+                'name': da['name'],
+                'barcode': da['barcode'],
+                'description': da['description'],
+                'default_code': da['default_code'],
+                'list_price': da['list_price'],
+                'company_id': int(da['company_id'])
             }
         ])
         return JsonResponse({"message": "Se agrego"})
-    except:
-        return JsonResponse({"message": "Error"})
+    except Exception as e:
+        return JsonResponse({"message": e})
 
         return redirect('/products')
 
