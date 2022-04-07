@@ -87,10 +87,9 @@ def create(request):
                 'name': datos['name'],
                 'description': datos['description'],
                 'barcode': datos['barcode'],
-                'description_picking':datos['description_picking'],
                 'default_code': datos['default_code'],
-                'list_price': datos['list_price'],
-                'company_id': 4
+                'list_price': float(datos['list_price'])*1.16,
+                'company_id': datos['companyId']
             }
         ])
         return JsonResponse({"message": "Se agrego"})
@@ -133,7 +132,7 @@ def update(request,id):
     }
     return render(request, 'update.html', data)
 
-@login_required
+
 def updateProduct(request, id):
     datos = request.POST
     try:
@@ -143,16 +142,14 @@ def updateProduct(request, id):
                 'name': datos['name'],
                 'description': datos['description'],
                 'barcode': datos['barcode'],
-                # 'categ_id': datos['categ_id'],
-                'description_picking':datos['imagen'],
                 'default_code': datos['default_code'],
-                'list_price': datos['list_price']
+                'list_price': float(datos['list_price'])*1.16,
+                'company_id': datos['companyId']
             }
         ])
         return JsonResponse({"message":"Ok"})
-        return redirect('/get/' + str(id))
-    except:
-        return JsonResponse({"message":"Error"})
+    except Exception as e:
+        return JsonResponse({"message":e})
 def createCsvProducts(name, description, description_purchase, description_sale, type, barcode, defaultCode, categ_id, listPrice, volume, weight, companyId, sale_ok, purchase_ok, active, imagen):
     self = connectionOdoo()
     try:

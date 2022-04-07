@@ -62,19 +62,15 @@
                 <div class="validate"></div>
               </div>
               <div class="form-group">
-                <input value ="{{data.categ_id}}" type="text" class="form-control" name="categ_id" id="categ_id" placeholder="ID categoria"  data-msg="Please enter at least 8 chars of subject" required/>
-                <div class="validate"></div>
-              </div>
-              <div class="form-group">
                 <input value ="{{data.list_price}}" type="text" class="form-control" name="list_price" id="list_price" placeholder="Precio"  data-msg="Please enter at least 8 chars of subject" required/>
                 <div class="validate"></div>
               </div>
               <div class="form-group">
-                <input value ="{{data.list_price}}" type="text" class="form-control" name="list_price" id="list_price" placeholder="Precio"  data-msg="Please enter at least 8 chars of subject" required/>
+                <input value ="{{data.list_price}}" type="text" class="form-control" name="list_price2" id="list_price2" placeholder="Precio"  data-msg="Please enter at least 8 chars of subject" required/>
                 <div class="validate"></div>
               </div>
               <div class="form-group">
-                <input value ="{{data.company_id}}" type="text" class="form-control" name="companyId" id="companyId" placeholder="Company id"  data-msg="Please enter at least 8 chars of subject" required/>
+                <input value ="{{data.company_id.0}}" type="text" class="form-control" name="companyId" id="companyId" placeholder="Company id"  data-msg="Please enter at least 8 chars of subject" required/>
                 <div class="validate"></div>
               </div>
             
@@ -95,7 +91,7 @@
               var post_url = $("update_form").data("post-url");
               console.log(post_url);
               console.log(serializedData + "");
-              console.log("{{data.id}}");
+              console.log("/updateproduct/{{data.id}}");
               
               
               $.ajax({
