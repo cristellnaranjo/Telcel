@@ -8,8 +8,8 @@
       
 
       <div class="section-title">
-        <h2>Editar vuelo</h2>
-        <p>Si deseas editar algún vuelo hazlo desde la comodidad de tu hogar en nuestra página web o si deseas visitanos en el Aeropuerto Internacional de Mérida.</p>
+        <h2>Editar celular</h2>
+        <p>Si deseas editar un celular hazlo en el siguiente formulario.</p>
       </div>
     </div>
     <div class="container">
@@ -50,25 +50,13 @@
               <div class="validate"></div>
             </div>
             <div class="form-group">
+              <input value ="{{data.barcode}}" type="number" class="form-control" name="barcode" id="barcode" placeholder="Barcode"  data-msg="Please enter at least 8 chars of subject" required/>
+              <div class="validate"></div>
+            </div>
+            <div class="form-group">
               <input  value ="{{data.description}}"  type="text" class="form-control" name="description" id="description" placeholder="Descripciony"  data-msg="Please enter at least 8 chars of subject" required />
               <div class="validate"></div>
             </div>
-            <div class="form-group">
-              <input value ="{{data.description_purchase}}" type="text" class="form-control" name="description_purchase" id="description_purchase" placeholder="Descripcion purchase"  data-msg="Please enter at least 8 chars of subject" required />
-              <div class="validate"></div>
-            </div>
-            <div class="form-group">
-              <input value ="{{data.description_sale}}" type="text" class="form-control" name="description_sale" id="description_sale" placeholder="Descripcion sale"  data-msg="Please enter at least 8 chars of subject" required />
-              <div class="validate"></div>
-            </div>
-            <div class="form-group">
-                <input value ="{{data.type}}" type="text" class="form-control" name="type" id="type" placeholder="Tipo"  data-msg="Please enter at least 8 chars of subject" required/>
-                <div class="validate"></div>
-              </div>
-              <div class="form-group">
-                <input value ="{{data.barcode}}" type="number" class="form-control" name="barcode" id="barcode" placeholder="Barcode"  data-msg="Please enter at least 8 chars of subject" required/>
-                <div class="validate"></div>
-              </div>
               <div class="form-group">
                 <input value ="{{data.default_code}}" type="text" class="form-control" name="default_code" id="default_code" placeholder="Default code"  data-msg="Please enter at least 8 chars of subject" required/>
                 <div class="validate"></div>
@@ -82,15 +70,11 @@
                 <div class="validate"></div>
               </div>
               <div class="form-group">
-                <input value ="{{data.volume}}" type="text" class="form-control" name="volume" id="volume" placeholder="Volumen"  data-msg="Please enter at least 8 chars of subject" required/>
+                <input value ="{{data.list_price}}" type="text" class="form-control" name="list_price" id="list_price" placeholder="Precio"  data-msg="Please enter at least 8 chars of subject" required/>
                 <div class="validate"></div>
               </div>
               <div class="form-group">
-                <input value ="{{data.weight}}" type="text" class="form-control" name="weight" id="weight" placeholder="weight"  data-msg="Please enter at least 8 chars of subject" required/>
-                <div class="validate"></div>
-              </div>
-              <div class="form-group">
-                <input value ="{{data.description_picking}}" type="text" class="form-control" name="imagen" id="imagen" placeholder="Url imagen"  data-msg="Please enter at least 8 chars of subject" required/>
+                <input value ="{{data.company_id}}" type="text" class="form-control" name="companyId" id="companyId" placeholder="Company id"  data-msg="Please enter at least 8 chars of subject" required/>
                 <div class="validate"></div>
               </div>
             

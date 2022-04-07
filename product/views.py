@@ -25,8 +25,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 @login_required
-
-
 def viewproducts(request):
     odoo = connectionOdoo()
     try:
