@@ -188,7 +188,6 @@ def AddProductsCSV(request):
         odoo = connectionOdoo()
         csv_file = request.FILES["fileContent"]
         df = pd.read_csv(csv_file, sep=',', delimiter=None, header="infer", names=None, index_col=False)
-
     except:
         return JsonResponse({"message":"Error 1"})
     try:
@@ -206,7 +205,7 @@ def AddProductsCSV(request):
         if cont == 0:
             return JsonResponse({"message": "No se agrego ningun archivo"})
         else:
-            return JsonResponse({"message": "Se agregaron " + cont + " archivos"})
+            return JsonResponse({"message": str("Se agregaron " + cont + " archivos")})
 
 
 def logoutview(request):
