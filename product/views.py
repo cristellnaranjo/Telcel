@@ -6,8 +6,11 @@ from django.http import JsonResponse
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 
+import requests
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
 
-# import requests
+
 import xmlrpc.client
 import base64
 import sys
@@ -44,9 +47,9 @@ def viewproducts(request):
         data = {
             "products":products
         }
-    
+        
         return render(request ,"flights.html",data)
-        return JsonResponse({"message": "Ok"})
+        return JsonResponse(data)
     except:
         return JsonResponse({"message":"Error"})
 
@@ -218,3 +221,70 @@ def logoutview(request):
     return redirect('/login')
 def redirec(request):
     return redirect('/login')
+
+def prueba(request):
+    url  =  "http://host.docker.internal/api/"
+    token = "1F64GDWM9MU39NKZ7WRKVY5RG1WVWJDX"
+    
+    request_url = '{}products?display=[id,name,reference,description_short,description,price,manufacturer_name,condition]&filter[id]=4&output_format=JSON&ws_key={}'.format(url,token)
+    headers = {
+        'Accept':'application/json',
+        'Content-Type':'application/json',
+        }
+    r = requests.get(request_url,headers=headers, verify= False)
+    return HttpResponse(request_url)
+    return JsonResponse(r.json())
+
+@login_required
+def viewproductsPrestashop(request):
+    odoo = connectionOdoo()
+    try:
+        url  =  "http://host.docker.internal/api/"
+        token = "1F64GDWM9MU39NKZ7WRKVY5RG1WVWJDX"
+    
+        request_url = '{}products?display=[id,name,reference,description_short,description,price,manufacturer_name,condition,id_default_image]&output_format=JSON&ws_key={}'.format(url,token)
+        headers = {
+            'Accept':'application/json',
+            'Content-Type':'application/json',
+        }
+        products = requests.get(request_url,headers=headers, verify= False)
+    
+        data = products.json()
+        return render(request ,"flightsPres.html",data)
+    except:
+        return JsonResponse({message:"Error"})
+
+    
+@login_required
+def viewproductPrestashop(request, id):
+    try:
+        url  =  "http://host.docker.internal/api/"
+        token = "1F64GDWM9MU39NKZ7WRKVY5RG1WVWJDX"
+    
+        request_url = '{}products?display=[id,name,reference,description_short,description,price,manufacturer_name,condition,id_default_image]&filter[id]={}&output_format=JSON&ws_key={}'.format(url,id,token)
+        headers = {
+            'Accept':'application/json',
+            'Content-Type':'application/json',
+        }
+        products = requests.get(request_url,headers=headers, verify= False)
+    
+        data = products.json()
+
+        return render(request ,"getPres.html",data)
+        return JsonResponse(data)
+    except:
+        return JsonResponse({message:"Error"})
+
+@login_required
+def deleteProductPrestashop(request, id):
+    try:
+        url  =  "http://host.docker.internal/api/"
+        token = "1F64GDWM9MU39NKZ7WRKVY5RG1WVWJDX"
+    
+        request_url = '{}products/{}?ws_key={}'.format(url,id,token)
+        products = requests.delete(request_url)
+    
+        return JsonResponse({"message":"Borrado", "ID":id})
+    except:
+        return JsonResponse({"message":"Error", "ID":id})
+    

@@ -20,4 +20,11 @@ urlpatterns = [
     path('password_reset_done',PasswordResetDoneView.as_view(template_name='password_reset_done.html'),name='password_reset_done'),
     path('P<uidb64>[0-9A-Za-z\-]'+'/P<token>'+'/',PasswordResetConfirmView.as_view(template_name='password_reset_confirm.html'),name='password_reset_confirm'),
     path('password_reset_complete',PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'),name='password_reset_complete'),
+    path('prueba',prueba ,name='prueba'),
+    path('prestashop/products', viewproductsPrestashop, name="products_Presta"),
+    path('prestashop/get/<int:id>',viewproductPrestashop ,name='product_Presta'),
+    path('prestashop/delete/<int:id>', deleteProductPrestashop, name="delete_Presta"),
+    # path('prestashop/update/<int:id>', update, name="update"),
+    # path('prestashop/updateproduct/<int:id>', updateProduct, name="updateProduct"),
+    # path('prestashop/create', create, name="create"),
 ]

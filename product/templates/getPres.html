@@ -1,0 +1,80 @@
+{% include "layout/headerPres.html" %}
+<section style=" background: url('https://images.pexels.com/photos/1309644/pexels-photo-1309644.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940') top center; background-size: cover;">
+  
+  </section>
+  <main id="main">
+    <!-- ======= Faq Section ======= -->
+    <section id="faq" class="faq">
+      {% for data in products %}
+        <div class="container-fluid">
+  
+          <div class="row">
+  
+            <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
+  
+              <div class="content">
+                <h3><strong>{{data.name.0.value}}</strong></h3>
+                <p>
+                  Description corta: {{data.description_short.0.value}}
+                </p>
+                <p>
+                  Descripcion: {{data.description.0.value}}
+                </p>
+                <p>
+                  Costo: ${{data.price}}
+                </p>
+              </div>      
+  
+              <div class="accordion-list">
+                
+                <div style="display:flex; justify-content: space-around">
+                    <a href="/update/{{data.id}}"><button style=" width: 350px; border: 2px solid #009961; padding: 10px 30px; background: white; color: #009961; font-size: 14px; font-weight: 400; font-family: 'Raleway', sans-serif;font-weight: 600;transition: 0.4s;border-radius: 50px">Editar</button></a>
+                    <a onclick=eliminar()><button style=" width:350px; border: 2px solid #009961; padding: 10px 30px; background: white; color: #009961; font-size: 14px; font-weight: 400; font-family: 'Raleway', sans-serif;font-weight: 600;transition: 0.4s;border-radius: 50px">Eliminar</button></a>
+              </div>
+              </div>
+              
+              
+            </div>
+  
+            <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img" style='background-image: url("http://host.docker.internal/api/images/products/{{ data.id }}/{{ data.id_default_image }}&ws_key=1F64GDWM9MU39NKZ7WRKVY5RG1WVWJDX");'>&nbsp;</div>
+          </div>
+   
+        </div>
+        {% block javascript %}
+          <script>
+            function eliminar(){
+              if(confirm("¿Seguro que quieres eliminar el producto?"))
+              {
+                $.ajax({
+                  url : "/prestashop/delete/{{data.id}}",
+                  type : "POST",
+                  beforeSend: function () {
+                    // loading("Guardando productos")
+                    console.log("Cargando")
+                  },
+                  success: function(response){
+                    console.log(response)
+                    if(response['message'] == "Borrado")
+                    {
+                      confirm("Se ha eliminado")
+                      window.location = "/prestashop/products"
+                      
+                    }
+                    else
+                    {
+                      confirm("No se pudo eliminar")
+                    }
+                  },
+                  error: function (err) {
+                    console.log(err);
+                  },
+                });
+              }
+
+            }
+          </script>
+          {% endblock javascript %}
+         {% endfor %}
+      </section><!-- End Faq Section -->
+      {% include "layout/footer.html" %}
+

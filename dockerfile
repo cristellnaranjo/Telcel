@@ -8,3 +8,4 @@ RUN pip install -r requirements.txt
 COPY . /code/
 RUN pip install python-dotenv
 RUN pip install requests
+RUN pip install -U pyopenssl
