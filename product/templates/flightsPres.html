@@ -38,7 +38,7 @@
               <h3>{{ obj.name.0.value}}</h3>
               <h4><sup>$</sup>{{ obj.price }}<span> MXN</span></h4>
               <ul>
-                <li>{{ obj.description_short.0.value }}</li>
+                <li>{{ obj.description_short.0.value | slice:"3:-4" }}</li>
               </ul>
               
               <div class="btn-wrap">
