@@ -15,10 +15,10 @@
               <div class="content">
                 <h3><strong>{{data.name.0.value}}</strong></h3>
                 <p>
-                  Description corta: {{data.description_short.0.value}}
+                  Description corta: {{data.description_short.0.value | slice:"3:-4"}}
                 </p>
                 <p>
-                  Descripcion: {{data.description.0.value}}
+                  Descripcion: {{data.description.0.value | slice:"3:-4"}}
                 </p>
                 <p>
                   Costo: ${{data.price}}
